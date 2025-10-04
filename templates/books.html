@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block filter_bar %}
+<div class="row mx-0"> 
+  <div class="col-12 p-3"> 
+    <div class="d-flex align-items-center justify-content-between">
+      
+      <p class="mb-0">Number of titles: {{ books | length }}</p>
+      
+      <div class="d-flex align-items-center">
+        <p class="mb-1 me-3">Category</p>
+        <select class="form-select me-2" style="width: 100px; height: 40px;">
+          <option selected>All</option>
+          <option>Children</option>
+          <option>Teens</option>
+          <option>Adult</option>
+        </select>
+        <button class="btn btn-success">Search</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block mainblock %}
+  {% for book in books %}
+  <div class="row mb-4 p-3 border rounded shadow-sm bg-white d-flex mx-0"> 
+      
+      <div class="col-md-2 text-center h-100">
+          <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid rounded" style="max-height: 200px; object-fit: cover;">
+      </div>
+      
+      <div class="col-md-10 d-flex flex-column h-100"> 
+          
+          <h5 class="mt-0"><strong>{{ book.title }}</strong></h5>
+          <p>By {{ book.authors | join(", ") }}</p>
+          
+          <p class="text-muted">
+              Category: {{ book.category }}, 
+              {% if book.genres %}
+              {{ book.genres | join(", ") }}
+              {% else %}
+              No Genres
+              {% endif %}
+          </p>
+          <p class="text-muted">Pages: {{ book.pages }}</p>
+
+          {% if book.description|length > 0 %}
+          <p>{{ book.description[0] }}</p>
+          {% endif %}
+
+          {% if book.description|length > 1 %}
+          <p>{{ book.description[-1] }}</p>
+          {% endif %}
+
+          <div class="text-end mt-auto">
+              <button class="btn btn-success">More details</button>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+{% endblock %}
