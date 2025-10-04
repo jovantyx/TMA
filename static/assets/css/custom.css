@@ -6,7 +6,7 @@ body {
 }
 
 .img-fluid {
-    max-width: 70%;
+    max-width: 100%;
     height: auto;
 }
 
@@ -15,7 +15,7 @@ body {
 /* navbar */
 .sidebar {
     height: 100vh;
-    background: linear-gradient(rgba(64, 156, 98, 0.548), rgba(0, 0, 0, .9)), url(../../img/sidebar_bg.png);
+    background: linear-gradient(rgba(9, 221, 59, 0.548), rgba(0, 0, 0, .9)), url(../../img/sidebar_bg.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -35,15 +35,8 @@ body {
     border-radius: 5px;
 }
 
-.current {
-    background-color: #f44336;
-    border-radius: 7px;
-    box-shadow: 2px 5px 10px #111;
-    transition: all .3s;
-}
-
 .current:hover {
-    background-color: #f66436;
+    background-color: #3676f6;
     border-radius: 7px;
     box-shadow: 2px 5px 20px #111;
     transform: translateY(-1px);
@@ -141,6 +134,11 @@ tr {
 .card-common:hover {
     box-shadow: 2px 3px 15px #999;
     transform: translateY(-1px);
+}
+
+.filter_bar {
+    position: static;
+    background: linear-gradient(rgba(64, 156, 58, 0.548));
 }
 
 

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block filter_bar %}
-<div class="row mx-md-5 mb-4 border rounded shadow-sm bg-white"> 
+<div class="row mx-md-5 mb-4 border rounded shadow-sm filter_bar"> 
   <div class="col-12 p-3"> 
     <div class="d-flex align-items-center justify-content-between">
       
@@ -25,14 +25,14 @@
   {% for book in books %}
   <div class="row mb-3 p-5 border rounded bg-white mx-md-5 card-common"> 
       
-      <div class="col-md-2 text-center h-100">
-          <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid rounded" style="max-height: 200px; object-fit: cover;">
+      <div class="col-md-2 text-center">
+          <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid rounded" style="object-fit: cover;">
       </div>
       
-      <div class="col-md-5 d-flex flex-column h-100"> 
+      <div class="col-7 d-flex flex-column"> 
           
-          <h5 class="mt-0"><strong>{{ book.title }}</strong></h5>
-          <p>By {{ book.authors | join(", ") }}</p>
+          <h5 class="mt-0 mb-0"><strong>{{ book.title }}</strong></h5>
+          <h5 class="mb-0"><strong> {{ book.authors | join(", ") }}</strong></h5>
           
           <p class="text-muted">
               Category: {{ book.category }}, 
@@ -52,8 +52,8 @@
           <p>{{ book.description[-1] }}</p>
           {% endif %}
 
-          <div class="text-end mt-auto">
-              <button class="btn btn-success">More details</button>
+          <div class="text-end">
+            <button class="btn btn-success">More details</button>
           </div>
       </div>
   </div>
