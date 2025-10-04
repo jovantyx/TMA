@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block filter_bar %}
+<form action="/booktitles" method="GET"> 
 <div class="row mx-md-5 mb-4 border rounded shadow-sm filter_bar"> 
   <div class="col-12 p-3"> 
     <div class="d-flex align-items-center justify-content-between">
@@ -9,13 +10,13 @@
       
       <div class="d-flex align-items-center">
         <p class="mb-0 me-4 p-1">Category</p>
-        <select class="form-select me-3" style="width: 150px; height: 40px;">
-          <option selected>All</option>
-          <option>Children</option>
-          <option>Teens</option>
-          <option>Adult</option>
+        <select class="form-select me-3" name="category" style="width: 150px; height: 40px;">
+          <option value="All" {% if selected_category == 'All' %}selected{% endif %}>All</option>
+          <option value="Children" {% if selected_category == 'Children' %}selected{% endif %}>Children</option>
+          <option value="Teens" {% if selected_category == 'Teens' %}selected{% endif %}>Teens</option>
+          <option value="Adult" {% if selected_category == 'Adult' %}selected{% endif %}>Adult</option>
         </select>
-        <button class="btn btn-success">Search</button>
+        <button class="btn btn-success" type="submit">Search</button>
       </div>
     </div>
   </div>
@@ -26,10 +27,10 @@
   <div class="row mb-3 p-5 border rounded bg-white mx-md-5 card-common"> 
       
       <div class="col-md-2 text-center">
-          <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid rounded" style="object-fit: cover;">
+          <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid rounded">
       </div>
       
-      <div class="col-7 d-flex flex-column"> 
+      <div class="col-7 col-md-10 d-flex flex-column"> 
           
           <h5 class="mt-0 mb-0"><strong>{{ book.title }}</strong></h5>
           <h5 class="mb-0"><strong> {{ book.authors | join(", ") }}</strong></h5>
@@ -51,9 +52,8 @@
           {% if book.description|length > 1 %}
           <p>{{ book.description[-1] }}</p>
           {% endif %}
-
-          <div class="text-end">
-            <button class="btn btn-success">More details</button>
+          <div class="col-5 col-md-1 text-end align-self-end btn-flush-right mx-md-5 p-5">
+              <button class="btn btn-success">More details</button>
           </div>
       </div>
   </div>

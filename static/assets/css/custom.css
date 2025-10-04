@@ -140,5 +140,8 @@ tr {
     position: static;
     background: linear-gradient(rgba(64, 156, 58, 0.548));
 }
+.btn-flush-right {
+    margin-right: -3rem;
+}
 
 
