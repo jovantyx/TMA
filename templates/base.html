@@ -14,7 +14,7 @@
     crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/custom.css')}}">
-  <title>Book Titles</title>
+  <title>SG Library - {{ panel }}</title>
 </head>
 
 <body>
@@ -39,7 +39,7 @@
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto bg-dark fixed-top py-2 top-navbar">
             <div class="row align-items-center">
               <div class="col-md-4">
-                <h4 class="text-light text-uppercase mb-0">Book Titles</h4>
+                <h4 class="text-light text-uppercase mb-0">{{ panel }}</h4>
               </div>
             </div>
           </div>

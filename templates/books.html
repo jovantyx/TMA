@@ -53,7 +53,7 @@
           <p>{{ book.description[-1] }}</p>
           {% endif %}
           <div class="col-5 col-md-1 text-end align-self-end btn-flush-right mx-md-5 p-5">
-              <button class="btn btn-success">More details</button>
+              <a href="{{ url_for('show_details', title=book.title) }}" class="btn btn-success">More details</a>
           </div>
       </div>
   </div>

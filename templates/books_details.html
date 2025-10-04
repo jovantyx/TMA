@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block mainblock %}
+<div class="row">
+    <div class="col-12 p-3">
+        <div class="row mb-3 p-5 border rounded bg-white mx-md-5 card-common"> 
+            
+            <div class="col-md-2 text-center">
+                <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid rounded">
+            </div>
+            
+            <div class="col-10 d-flex flex-column"> 
+                
+                <h3 class="mt-0 mb-2"><strong>{{ book.title }}</strong></h3>
+                <h3 class="mb-3"><strong> {{ book.authors | join(", ") }}</strong></h3>
+                
+                <h5>
+                    Category: {{ book.category }}, 
+                    {% if book.genres %}
+                    {{ book.genres | join(", ") }}
+                    {% else %}
+                    No Genres
+                    {% endif %}
+                </h5>
+                
+                <p class="mb-1">Pages: {{ book.pages }}</p>
+                <p class="mb-4"><strong>Copies:</strong> {{ book.copies }} <strong>Available:</strong> {{ book.available }}</p>
+                
+                {% for paragraph in book.description %}
+                <p>{{ paragraph }}</p>
+                {% endfor %}
+                
+                <div class="align-self-end btn-flush-right mx-md-5">
+                    <a href="{{ url_for('show_base') }}" class="btn btn-success">Back to Book Titles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
