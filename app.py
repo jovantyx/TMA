@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify, url_for, redirect, Flask
-from books import all_books
+from model.books import all_books
 
 app = Flask(__name__)
 
