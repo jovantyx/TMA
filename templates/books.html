@@ -25,25 +25,24 @@
 {% block mainblock %}
   {% for book in books %}
   <div class="row mb-3 p-5 border rounded bg-white mx-md-5 card-common"> 
-      
       <div class="col-md-2 text-center">
           <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid rounded">
       </div>
       
       <div class="col-7 col-md-10 d-flex flex-column"> 
           
-          <h5 class="mt-0 mb-0"><strong>{{ book.title }}</strong></h5>
-          <h5 class="mb-0"><strong> {{ book.authors | join(", ") }}</strong></h5>
-          
-          <p class="text-muted">
+          <h3 class="mt-0 mb-2"><strong>{{ book.title }}</strong></h3>
+          <h3 class="mb-3"><strong> {{ book.authors | join(", ") }}</strong></h3>
+                
+          <h5>
               Category: {{ book.category }}, 
               {% if book.genres %}
               {{ book.genres | join(", ") }}
               {% else %}
               No Genres
               {% endif %}
-          </p>
-          <p class="text-muted">Pages: {{ book.pages }}</p>
+          </h5>
+          <p class="mb-4">Pages: {{ book.pages }}</p>
 
           {% if book.description|length > 0 %}
           <p>{{ book.description[0] }}</p>
@@ -57,5 +56,6 @@
           </div>
       </div>
   </div>
+</form>
   {% endfor %}
 {% endblock %}
