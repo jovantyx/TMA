@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block filter_bar %}
+<form action="/booktitles" method="GET"> 
+<div class="row mx-md-5 mb-4 border rounded shadow-sm filter_bar"> 
+  <div class="col-12 p-3"> 
+    <div class="d-flex align-items-center justify-content-between">
+      
+      <p class="mb-0">Number of titles: {{ books | length }}</p>
+      
+      <div class="d-flex align-items-center">
+        <p class="mb-0 me-4 p-1">Category</p>
+        <select class="form-select me-3" name="category" style="width: 150px; height: 40px;">
+          <option value="All" {% if selected_category == 'All' %}selected{% endif %}>All</option>
+          <option value="Children" {% if selected_category == 'Children' %}selected{% endif %}>Children</option>
+          <option value="Teens" {% if selected_category == 'Teens' %}selected{% endif %}>Teens</option>
+          <option value="Adult" {% if selected_category == 'Adult' %}selected{% endif %}>Adult</option>
+        </select>
+        <button class="btn btn-success" type="submit">Search</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block mainblock %}
+  {% for book in books %}
+  <div class="row mb-3 p-5 border rounded bg-white mx-md-5 card-common"> 
+      <div class="col-md-2 text-center">
+          <img src="{{ book.url }}" alt="{{ book.title }} cover" class="img-fluid rounded">
+      </div>
+      
+      <div class="col-7 col-md-10 d-flex flex-column"> 
+          
+          <h3 class="mt-0 mb-2"><strong>{{ book.title }}</strong></h3>
+          <h3 class="mb-3"><strong> {{ book.authors | join(", ") }}</strong></h3>
+                
+          <h5>
+              Category: {{ book.category }}, 
+              {% if book.genres %}
+              {{ book.genres | join(", ") }}
+              {% else %}
+              No Genres
+              {% endif %}
+          </h5>
+          <p class="mb-4">Pages: {{ book.pages }}</p>
+
+          {% if book.description|length > 0 %}
+          <p>{{ book.description[0] }}</p>
+          {% endif %}
+
+          {% if book.description|length > 1 %}
+          <p>{{ book.description[-1] }}</p>
+          {% endif %}
+          <div class="col-5 col-md-1 text-end align-self-end btn-flush-right mx-md-5 p-5">
+              <a href="{{ url_for('book_bp.show_details', title=book.title) }}" class="btn btn-success">More details</a>
+          </div>
+      </div>
+  </div>
+</form>
+  {% endfor %}
+{% endblock %}
