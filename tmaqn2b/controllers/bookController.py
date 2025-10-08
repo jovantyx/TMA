@@ -34,7 +34,7 @@ def show_details():
     selected_book = Book.get_book_by_title(book_title)
     
     if selected_book is None:
-        return redirect(url_for('book_bp.show_base')) 
+        return redirect(url_for('book_bp.show_books')) 
 
     return render_template(
         'books_details.html',
