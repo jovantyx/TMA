@@ -1,11 +1,14 @@
 from flask import Blueprint, render_template, request, url_for, redirect
-from model.books import all_books
+from tmaqn2b.model.books import Book
 
 bp = Blueprint('book_bp', __name__) 
 
 @bp.route('/')
 @bp.route('/booktitles', methods=['GET'])
-def show_base():
+def show_books():
+    if Book.objects.count() == 0:
+        Book.save_books()
+    all_books = Book.get_all_books()
     selected_category = request.args.get('category', 'All')
 
     sorted_books = sorted(all_books, key=lambda book: book['title'])
@@ -28,7 +31,7 @@ def show_base():
 @bp.route('/bookdetails', methods=['GET'])
 def show_details():
     book_title = request.args.get('title')
-    selected_book = next((book for book in all_books if book['title'] == book_title), None)
+    selected_book = Book.get_book_by_title(book_title)
     
     if selected_book is None:
         return redirect(url_for('book_bp.show_base')) 

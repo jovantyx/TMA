@@ -1,3 +1,5 @@
+from tmaqn2b import db
+
 all_books = [
     {
         'genres': ["Fantasy","Dark Academia", "Fiction", "Romance"]
@@ -171,3 +173,41 @@ all_books = [
         , 'copies': 1
         }
 ]
+
+
+class Book(db.Document):
+    meta = {"collection": "book"}
+    genres = db.ListField(db.StringField())
+    title = db.StringField()
+    category = db.StringField()
+    url = db.StringField()
+    description = db.ListField(db.StringField())
+    authors = db.ListField(db.StringField())
+    pages = db.IntField()
+    available = db.IntField()
+    copies = db.IntField()
+
+    @staticmethod
+    def save_books():
+        for book_data in all_books:
+            book = Book(
+                genres=book_data['genres'],
+                title=book_data['title'],
+                category=book_data['category'],
+                url=book_data['url'],
+                description=book_data['description'],
+                authors=book_data['authors'],
+                pages=book_data['pages'],
+                available=book_data['available'],
+                copies=book_data['copies']
+            )
+            book.save()
+    
+
+    @staticmethod
+    def get_all_books():
+        return Book.objects()
+        
+    @staticmethod
+    def get_book_by_title(title):
+        return Book.objects(title=title).first() 
