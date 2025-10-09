@@ -36,6 +36,11 @@
               <li class="nav-item">
                 <a href="{{ url_for('book_bp.show_books') }}" class="nav-link text-white p-3 mb-2 current"><i class="fas fa-address-card fa-lg mr-3"></i>Book Titles</a>
               </li>
+              {% if current_user.email == "admin@lib.sg" %}
+              <li class="nav-item">
+                <a href="{{ url_for('book_bp.new_book') }}" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-cloud-upload-alt fa-lg mr-3"></i>Add New Book</a>
+              </li>
+              {% endif %}
               {% if not current_user.is_authenticated %}
               <li class="nav-item">
                 <a href="{{ url_for('auth.login') }}" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-sign-in-alt fa-lg mr-3"></i>Login</a>

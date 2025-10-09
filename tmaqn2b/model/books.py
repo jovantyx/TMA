@@ -210,4 +210,19 @@ class Book(db.Document):
         
     @staticmethod
     def get_book_by_title(title):
-        return Book.objects(title=title).first() 
+        return Book.objects(title=title).first()
+
+    @staticmethod
+    def create_book(genres, title, category, url, description, authors, pages, available, copies):
+        return Book(
+            genres=genres,
+            title=title,
+            category=category,
+            url=url,
+            description=description,
+            authors=authors,
+            pages=pages,
+            available=available,
+            copies=copies
+        ).save()
+        return book 
