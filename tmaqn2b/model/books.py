@@ -225,4 +225,13 @@ class Book(db.Document):
             available=available,
             copies=copies
         ).save()
-        return book 
+    
+    def borrow_book(self):
+        if self.available > 0:
+            self.available -= 1
+            self.save()
+    
+    def return_book(self): 
+        if self.available < self.copies:
+            self.available += 1
+            self.save()

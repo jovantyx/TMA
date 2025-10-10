@@ -31,6 +31,13 @@
                 {% endfor %}
                 
                 <div class="align-self-end btn-flush-right mx-md-5">
+                    {% if book.available and current_user.email != "admin@lib.sg" %}
+                    <button class="btn btn-success mx-1">Make a Loan</button>
+                    {% else %}
+                    <button class="btn btn-danger mx-1 disabled">Not Available</button>
+
+
+                        {% endif %}
                     <a href="{{ url_for('book_bp.show_books') }}" class="btn btn-success">Back to Book Titles</a>
                 </div>
             </div>
