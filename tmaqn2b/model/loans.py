@@ -59,7 +59,7 @@ class Loan(db.Document):
             ).save()
             book.borrow_book()
 
-            return Loan
+            return loan
         
     def get_dueDate(self):
         return self.borrowDate + timedelta(days=14)

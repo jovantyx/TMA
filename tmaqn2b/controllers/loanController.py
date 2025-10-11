@@ -13,15 +13,14 @@ def generate_date(a: date, add_days: bool) -> date:
     random_td = timedelta(days=randint(10, 20))
     
     if add_days:
-        # This logic handles the renewal constraint from the original code
+       
         if a >= date.today() - timedelta(days=10):
             return date.today()
         
-        # New renewal/return date is today plus a random duration (10-20 days)
+        
         return date.today() + random_td
     else:
-        # New borrowDate is the start date (a, which is date.today()) minus a random duration
-        # This calculates a past date, consistent with the original logic's intent.
+        
         return a - random_td
 
 
@@ -65,9 +64,8 @@ def return_loan(book_title):
 def delete_loan(book_title):
     
     loan = Loan.getLoanbyBook(current_user.email, book_title)
-    new_borrowDate = generate_date(loan.borrowDate, True)
-    loan.renewLoan(new_borrowDate)
-    flash(f"{loan.book.title} loan has been renewed.", "success")
+    loan.deleteLoan()
+    flash(f"{loan.book.title} loan has been deleted.", "success")
         
     return redirect(url_for('loan_bp.display_loans'))
 
