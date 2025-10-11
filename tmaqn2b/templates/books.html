@@ -53,12 +53,12 @@
           {% endif %}
           <div class="align-self-end btn-flush-right mx-md-5 p-5 d-flex flex-row ">
               {% if book.available and current_user.email != "admin@lib.sg" %}
-              <button class="btn btn-success mx-1">Make a Loan</button>
+              <a href="{{ url_for('loan_bp.make_loan', book_title=book.title) }}" class="btn btn-success mx-1">Make a Loan</a>
               {% endif %}
               <a href="{{ url_for('book_bp.show_details', title=book.title) }}" class="btn btn-success">More details</a>
           </div>
       </div>
-  </div>
-</form>
+    </div>
   {% endfor %}
+</form>
 {% endblock %}

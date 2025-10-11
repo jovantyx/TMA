@@ -36,6 +36,11 @@
               <li class="nav-item">
                 <a href="{{ url_for('book_bp.show_books') }}" class="nav-link text-white p-3 mb-2 current"><i class="fas fa-address-card fa-lg mr-3"></i>Book Titles</a>
               </li>
+              {% if current_user.is_authenticated and current_user.email != "admin@lib.sg" %}
+              <li class="nav-item">
+                <a href="{{ url_for('loan_bp.display_loans') }}" class="nav-link text-white p-3 mb-2 sidebar-link"><i class = "fas fa-clipboard fa-lg mr-3"></i>Loans</a>
+              </li>
+              {% endif %}
               {% if current_user.email == "admin@lib.sg" %}
               <li class="nav-item">
                 <a href="{{ url_for('book_bp.new_book') }}" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-cloud-upload-alt fa-lg mr-3"></i>Add New Book</a>
