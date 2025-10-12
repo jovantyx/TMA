@@ -13,7 +13,7 @@
             <thead>
                 <tr>
                     <th scope="col">Title/Author</th>
-                    <th scope="col">Due Date</th>
+                    <th scope="col">Borrow Date</th>
                     <th scope="col">Return Date</th>
                     <th scope="col">Renew Count</th>
                     <th scope="col"></th>
@@ -24,35 +24,51 @@
                 {% for loan in all_loans %}
                 <tr>
                     {% if loan.book %}
+                        <td>
+                            <img class="img-fluid loan-book-cover" src="{{ loan.book.url }}" alt="{{ loan.book.title }} cover" style="max-height: 100px;">
+                            <br>
+                            <strong>{{ loan.book.title }}</strong>
+                            <br>
+                            By {{ loan.book.authors | join(', ')  }}
+                        </td>
+                        <td>
+                            {{ loan.borrowDate.strftime('%Y-%m-%d') }}
+                        </td>
+                        <td>
+                            {% if loan.returnDate %} 
+                                {{ loan.returnDate.strftime('%Y-%m-%d') }} 
+                            {% else %}
+                                Currently Out
+                            {% endif %}
+                        </td>
+                        <td>{{ loan.renewCount }}</td>
                         {% if loan.returnDate %}
-                        <td>
-                            <form method="POST" action="{{ url_for('loan_bp.delete_loan', book_title=loan.book.title) }}">
-                                <button type="submit" class="btn btn-danger text-light">Delete</button>
-                            </form>
-                        </td>
-                        <td></td>
-                        {% elif not loan.is_overdue() %}
-                        <td>
-                            <form method="POST" action="{{ url_for('loan_bp.return_loan', book_title=loan.book.title) }}">
-                                <button type="submit" class="btn btn-success text-light">Return</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form method="POST" action="{{ url_for('loan_bp.renew_loan', book_title=loan.book.title) }}">
-                                <button type="submit" class="btn btn-success text-light">Renew</button>
-                            </form>
-                        </td>
+                            <td>
+                                <form method="POST" action="{{ url_for('loan_bp.delete_loan', book_title=loan.book.title) }}">
+                                    <button type="submit" class="btn btn-danger text-light">Delete</button>
+                                </form>
+                            </td>
+                            <td></td>
                         {% elif loan.is_overdue() or loan.renewCount >= 2 %}
-                        <td>
-                            <form method="POST" action="{{ url_for('loan_bp.return_loan', book_title=loan.book.title) }}">
-                                <button type="submit" class="btn btn-success text-light">Return</button>
-                            </form>
-                        </td>
-                        <td></td>
+                            <td>
+                                <form method="POST" action="{{ url_for('loan_bp.return_loan', book_title=loan.book.title) }}">
+                                    <button type="submit" class="btn btn-success text-light">Return</button>
+                                </form>
+                            </td>
+                            <td></td>
+                        {% else %}
+                            <td>
+                                <form method="POST" action="{{ url_for('loan_bp.return_loan', book_title=loan.book.title) }}">
+                                    <button type="submit" class="btn btn-success text-light">Return</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ url_for('loan_bp.renew_loan', book_title=loan.book.title) }}">
+                                    <button type="submit" class="btn btn-success text-light">Renew</button>
+                                </form>
+                            </td>
                         {% endif %} 
-                    {% else %}
-                        <td colspan="6">Error: Book not found for this loan.</td>
-                    {% endif %}
+                        {% endif %}
                 </tr>
                 {% endfor %} 
             </tbody>

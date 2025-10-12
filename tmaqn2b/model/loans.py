@@ -29,7 +29,7 @@ class Loan(db.Document):
 
             member = User.getUser(email),
             book = book_doc
-        ).select_related('book')
+        )
         sorted_loans = loans.order_by("returnDate")
         return sorted_loans.first()
     
