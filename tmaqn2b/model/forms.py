@@ -8,14 +8,23 @@ class RegForm(FlaskForm):
     name = StringField('Name')
 
 class BookForm(FlaskForm):
-    genres = SelectMultipleField("Choose multiple Genres:", choices= [
-        "Animals", "Business", "Comics", "Communication", "Dark Academia", 
-        "Emotion", "Fantasy", "Fiction", "Friendship", "Graphic Novels", 
-        "Grief", "Historical Fiction", "Indigenous", "Inspirational", "Magic",
-        "Mental Health", "Nonfiction", "Personal Development", "Philosophy", 
-        "Picture Books", "Poetry", "Productivity", "Psychology", "Romance",
-        "School", "Self Help"
-    ], validators=[InputRequired()])
+    class BookForm(FlaskForm):
+        GENRE_CHOICES = [\
+            ("Animals", "Animals"), ("Business", "Business"), ("Comics", "Comics"), \
+            ("Communication", "Communication"), ("Dark Academia", "Dark Academia"), \
+            ("Emotion", "Emotion"), ("Fantasy", "Fantasy"), ("Fiction", "Fiction"), \
+            ("Friendship", "Friendship"), ("Graphic Novels", "Graphic Novels"), \
+            ("Grief", "Grief"), ("Historical Fiction", "Historical Fiction"), \
+            ("Indigenous", "Indigenous"), ("Inspirational", "Inspirational"), ("Magic", "Magic"),\
+            ("Mental Health", "Mental Health"), ("Nonfiction", "Nonfiction"), ("Personal Development", "Personal Development"), \
+            ("Philosophy", "Philosophy"), ("Picture Books", "Picture Books"), ("Poetry", "Poetry"), \
+            ("Productivity", "Productivity"), ("Psychology", "Psychology"), ("Romance", "Romance"),\
+            ("School", "School"), ("Self Help", "Self Help")\
+        ]
+    
+    genres = SelectMultipleField("Choose multiple Genres:", 
+                                 choices=GENRE_CHOICES, 
+                                 validators=[InputRequired()])
 
     title = StringField("Title", validators=[InputRequired()])
 

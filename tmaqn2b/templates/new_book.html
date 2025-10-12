@@ -22,11 +22,11 @@
             {{ render_book_field(form.category, type="category", id="category") }}
             {{ render_book_field(form.url, type="url", id="url") }}
             {{ render_book_field(form.description, type="description", id="description") }}
-            {{ render_author_field(form.author_1, form.is_illustrator_1, id="author_1") }}
-            {{ render_author_field(form.author_2, form.is_illustrator_2, id="author_2") }}
-            {{ render_author_field(form.author_3, form.is_illustrator_3, id="author_3") }}
-            {{ render_author_field(form.author_4, form.is_illustrator_4, id="author_4") }}
-            {{ render_author_field(form.author_5, form.is_illustrator_5, id="author_5") }}
+            {{ render_author_field(form.author_1, form.is_illustrator_1) }}
+            {{ render_author_field(form.author_2, form.is_illustrator_2) }}
+            {{ render_author_field(form.author_3, form.is_illustrator_3) }}
+            {{ render_author_field(form.author_4, form.is_illustrator_4) }}
+            {{ render_author_field(form.author_5, form.is_illustrator_5) }}
             {{ render_book_field(form.pages, type="pages", id="pages") }}
             {{ render_book_field(form.copies, type="copies", id="copies") }}
             {{ form.hidden_tag() }}
